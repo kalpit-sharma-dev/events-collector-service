@@ -14,17 +14,17 @@ services:
       - .:/go/app
     security_opt: 
       - seccomp:unconfined
-  #   depends_on:
-  #     - postgres
-  # postgres:
-  #   image: events-collector/postgres:local
-  #   container_name : postgres
-  #   ports:
-  #     - 5432:5432
-  #   env_file: .env
-  #   environment:
-  #     POSTGRES_DB: defaultdb
-  #     POSTGRES_USER: $DB_MASTER_USER
-  #     POSTGRES_PASSWORD: $DB_MASTER_PASS
-  #   volumes:
-  #     - ./sql:/mnt/artifacts
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    container_name : postgres
+    ports:
+      - 5432:5432
+    env_file: .env
+    environment:
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    volumes:
+      - ./sql:/mnt/artifacts

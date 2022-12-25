@@ -9,7 +9,7 @@ import (
 func main() {
 
 	log.Print("INFO : starting the application ....")
-
+	server.LoadDB()
 	server.LoadRoute()
 
 }
