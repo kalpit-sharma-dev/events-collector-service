@@ -18,7 +18,7 @@ func (s *EventCollectorServiceImpl) CreateEvent(ctx context.Context, eventReq mo
 }
 
 // GetEvent implements EventService
-func (s *EventCollectorServiceImpl) GetAllEvents(ctx context.Context) (eventResponse models.Response, err error) {
+func (s *EventCollectorServiceImpl) GetAllEvents(ctx context.Context) (eventResponse []models.Response, err error) {
 	eventResponse, err = s.repository.GetAllEvents(ctx)
 	return
 }

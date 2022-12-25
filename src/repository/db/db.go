@@ -14,11 +14,13 @@ type DatabaseImpl struct {
 
 // CreateEvents implements repository.DatabaseRepository
 func (*DatabaseImpl) CreateEvents(ctx context.Context, req models.Request) (eventResp models.Response, err error) {
-	panic("unimplemented")
+
+	return eventResp, nil
+	//panic("unimplemented")
 }
 
 // GetAllEvents implements repository.DatabaseRepository
-func (*DatabaseImpl) GetAllEvents(ctx context.Context) (eventResp models.Response, err error) {
+func (*DatabaseImpl) GetAllEvents(ctx context.Context) (eventResp []models.Response, err error) {
 	panic("unimplemented")
 }
 
