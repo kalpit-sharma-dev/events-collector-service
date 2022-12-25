@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/kalpit-sharma-dev/kalpit.cool2006-gmail.com/src/handlers"
 )
 
 func LoadRoute() {
@@ -20,8 +21,8 @@ func LoadRoute() {
 func registerAppRoutes(r *mux.Router) {
 	log.Println("INFO : Registering Router ")
 
-	r.HandleFunc("/collector/events").Methods(http.MethodGet)
-	r.HandleFunc("/collector/events").Methods(http.MethodPost)
+	r.HandleFunc("/collector/events", handlers.HandleGetAllEvents).Methods(http.MethodGet)
+	r.HandleFunc("/collector/events", handlers.HandleGetAllEvents).Methods(http.MethodPost)
 	log.Println("INFO : Router Registered Successfully")
 }
 

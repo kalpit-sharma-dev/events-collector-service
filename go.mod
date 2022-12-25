@@ -1,4 +1,4 @@
-module kalpit.cool2006-gmail.com
+module github.com/kalpit-sharma-dev/kalpit.cool2006-gmail.com
 
 go 1.19
 

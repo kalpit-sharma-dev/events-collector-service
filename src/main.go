@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/opsdev-onecom/kalpit.cool2006-gmail.com/src/server"
+	server "github.com/kalpit-sharma-dev/kalpit.cool2006-gmail.com/src/server"
 )
 
 func main() {
