@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  server: 
+    image: events-collector:debug
+    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile 
+      target: debug
+    ports:
+      - 9999:9999
+      - 40000:40000
+    volumes:
+      - .:/go/app
+    security_opt: 
+      - seccomp:unconfined
+    depends_on:
+      - postgres
+  postgres:
+    image: events-collector/postgres:local
+    container_name : postgres
+    ports:
+      - 5432:5432
+    env_file: .env
+    environment:
+      POSTGRES_DB: defaultdb
+      POSTGRES_USER: $DB_MASTER_USER
+      POSTGRES_PASSWORD: $DB_MASTER_PASS
+    volumes:
+      - ./sql:/mnt/artifacts
