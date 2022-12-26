@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/kalpit-sharma-dev/kalpit.cool2006-gmail.com/src/errors"
 	"github.com/kalpit-sharma-dev/kalpit.cool2006-gmail.com/src/models"
 	"github.com/kalpit-sharma-dev/kalpit.cool2006-gmail.com/src/service"
 )
@@ -39,7 +40,7 @@ func (h *Handler) HandleCreateEvents(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println("error", err)
 		w.WriteHeader(http.StatusInternalServerError)
-		//errors.HandleError(w, err)
+		errors.HandleError(w, err)
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
