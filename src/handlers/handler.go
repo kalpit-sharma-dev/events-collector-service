@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -26,7 +25,7 @@ func (h *Handler) HandleGetAllEvents(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) HandleCreateEvents(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("@@@@@@@@@@@@@@@@@@@@@@@@@HandleCreateEvents")
+
 	decoder := json.NewDecoder(r.Body)
 	var req models.Event
 	err := decoder.Decode(&req)

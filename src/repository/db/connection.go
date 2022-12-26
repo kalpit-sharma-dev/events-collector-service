@@ -24,7 +24,7 @@ func GetDatabaseProvider(username, password, database string) (*sql.DB, error) {
 	//db := Database{}
 	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		HOST, PORT, username, password, database)
-	fmt.Println("###########################", dsn)
+
 	conn, err := sql.Open("postgres", dsn)
 	if err != nil {
 		return conn, err
