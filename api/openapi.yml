@@ -1,0 +1,88 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Swagger Event Collector
+servers:
+  - url: http://eventcollector.swagger.io/v1
+paths:
+  /collector/events:
+    get:
+      summary: Get All Events
+      operationId: listallevents
+      tags:
+        - events
+      responses:
+        200:
+          description: Get all events
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/GetAllEvents"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create an event
+      operationId: CreateEvents
+      tags:
+        - events
+      requestBody: 
+        description: Events Create Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventsReq'  
+      responses:
+        201:
+          description: Created Event
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/CreateEventsResp"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    GetAllEvents:
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    CreateEventsReq:
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    CreateEventsResp:
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string  
+        created_at:
+          type: string
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
