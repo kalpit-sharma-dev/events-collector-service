@@ -43,7 +43,7 @@ func registerAppRoutes(r *mux.Router) {
 	fmt.Println("@@@@@@@@@@@@@@@@@@@@@@@@@eventHandlers", eventHandlers)
 
 	r.HandleFunc("/collector/events", eventHandlers.HandleGetAllEvents).Methods(http.MethodGet)
-	r.HandleFunc("/collector/events", eventHandlers.HandleGetAllEvents).Methods(http.MethodPost)
+	r.HandleFunc("/collector/events", eventHandlers.HandleCreateEvents).Methods(http.MethodPost)
 	log.Println("INFO : Router Registered Successfully")
 }
 

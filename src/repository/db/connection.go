@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	HOST = "postgres"
+	HOST = "kalpitcool2006-gmailcom_my-postgres_1"
 	PORT = 5432
 )
 

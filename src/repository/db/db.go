@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"log"
 
 	"github.com/kalpit-sharma-dev/kalpit.cool2006-gmail.com/src/models"
 	"github.com/kalpit-sharma-dev/kalpit.cool2006-gmail.com/src/repository"
@@ -17,14 +18,20 @@ type DatabaseImpl struct {
 func (db *DatabaseImpl) CreateEvents(ctx context.Context, req models.Event) (eventResp models.Event, err error) {
 	var id int
 	var createdAt string
-	query := `INSERT INTO events (name, description) VALUES ($1, $2) RETURNING id, created_at`
+	var description string
+	var name string
+	query := `INSERT INTO events (name, description) VALUES ($1, $2) RETURNING id, description, name, created_at`
 	fmt.Println("$$$$$$$$$$$$QUERY$$$$$$$$$$$$$$$$$", query)
-	err = db.Conn.QueryRow(query, req.Name, req.Description).Scan(&id, &createdAt)
+	err = db.Conn.QueryRow(query, req.Name, req.Description).Scan(&id, &description, &name, &createdAt)
 	if err != nil {
+		log.Println(err)
 		return
 	}
+	fmt.Println(id, createdAt, "*****************************************")
 	eventResp.ID = id
 	eventResp.CreatedAt = createdAt
+	eventResp.Name = name
+	eventResp.Description = description
 	return
 }
 
