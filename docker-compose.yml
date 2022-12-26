@@ -15,16 +15,15 @@ services:
     security_opt: 
       - seccomp:unconfined
     depends_on:
-      - postgres
-  postgres:
-    image: postgres
-    container_name : postgres
+      - my-postgres
+  my-postgres:
     ports:
-      - 5432:5432
-    env_file: .env
-    environment:
-      POSTGRES_DB: $POSTGRES_DB
-      POSTGRES_USER: $POSTGRES_USER
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      - '5436:5432'
+    restart: always
+    image: postgres
+    environment: 
+      POSTGRES_DB: eventscollector
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
     volumes:
-      - ./sql:/mnt/artifacts
+      - ./postgres-initdb.sh:/docker-entrypoint-initdb.d/init.sh

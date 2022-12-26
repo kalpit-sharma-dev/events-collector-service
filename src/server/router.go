@@ -1,6 +1,7 @@
 package router
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -28,9 +29,18 @@ func registerAppRoutes(r *mux.Router) {
 	log.Println("INFO : Registering Router ")
 
 	log.Println("INFO : Registering Router ")
-	eventRepo := db.NewDatabaseRepository(db.GetDatabaseProvider(DBConfig.DBUser, DBConfig.DBName, DBConfig.DBPassword))
+
+	var dbConn db.DatabaseImpl
+	c, err := db.GetDatabaseProvider(DBConfig.DBUser, DBConfig.DBPassword, DBConfig.DBName)
+	dbConn.Conn = c
+	fmt.Println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR", err)
+	fmt.Println("@@@@@@@@@@@@@@@@@@@@@@@@@dbConn.Conn", DBConfig.DBUser, DBConfig.DBName, DBConfig.DBPassword)
+	eventRepo := db.NewDatabaseRepository(dbConn.Conn)
+	fmt.Println("@@@@@@@@@@@@@@@@@@@@@@@@@eventRepo", eventRepo)
 	eventService := service.NewEventService(eventRepo)
+	fmt.Println("@@@@@@@@@@@@@@@@@@@@@@@@@eventService", eventService)
 	eventHandlers := handlers.NewHandler(eventService)
+	fmt.Println("@@@@@@@@@@@@@@@@@@@@@@@@@eventHandlers", eventHandlers)
 
 	r.HandleFunc("/collector/events", eventHandlers.HandleGetAllEvents).Methods(http.MethodGet)
 	r.HandleFunc("/collector/events", eventHandlers.HandleGetAllEvents).Methods(http.MethodPost)

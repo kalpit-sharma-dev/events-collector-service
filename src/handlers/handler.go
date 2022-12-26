@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -25,24 +26,25 @@ func (h *Handler) HandleGetAllEvents(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) HandleCreateEvents(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("@@@@@@@@@@@@@@@@@@@@@@@@@HandleCreateEvents")
 	decoder := json.NewDecoder(r.Body)
-	var req models.Request
+	var req models.Event
 	err := decoder.Decode(&req)
 	if err != nil {
-		log.Fatal("unable to decode", err)
+		log.Println("unable to decode", err)
 		return
 	}
-	log.Println("INFO : HandleCreateUrl", r)
+	log.Println("INFO : HandleCreateEvent", r)
 
-	url, err := h.service.CreateEvent(r.Context(), req)
+	event, err := h.service.CreateEvent(r.Context(), req)
 	if err != nil {
-		log.Fatal("error", err)
+		log.Println("error", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		//errors.HandleError(w, err)
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(url)
+	json.NewEncoder(w).Encode(event)
 }
 
 func NewHandler(service service.EventCollectorService) *Handler {

@@ -12,13 +12,13 @@ type EventCollectorServiceImpl struct {
 }
 
 // CreateEvent implements EventService
-func (s *EventCollectorServiceImpl) CreateEvent(ctx context.Context, eventReq models.Request) (eventResponse models.Response, err error) {
+func (s *EventCollectorServiceImpl) CreateEvent(ctx context.Context, eventReq models.Event) (eventResponse models.Event, err error) {
 	eventResponse, err = s.repository.CreateEvents(ctx, eventReq)
 	return
 }
 
 // GetEvent implements EventService
-func (s *EventCollectorServiceImpl) GetAllEvents(ctx context.Context) (eventResponse []models.Response, err error) {
+func (s *EventCollectorServiceImpl) GetAllEvents(ctx context.Context) (eventResponse models.EventList, err error) {
 	eventResponse, err = s.repository.GetAllEvents(ctx)
 	return
 }

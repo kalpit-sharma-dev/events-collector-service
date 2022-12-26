@@ -7,6 +7,6 @@ import (
 )
 
 type EventCollectorService interface {
-	CreateEvent(ctx context.Context, eventReq models.Request) (eventResponse models.Response, err error)
-	GetAllEvents(ctx context.Context) (eventResponse []models.Response, err error)
+	CreateEvent(ctx context.Context, eventReq models.Event) (eventResponse models.Event, err error)
+	GetAllEvents(ctx context.Context) (eventResponse models.EventList, err error)
 }

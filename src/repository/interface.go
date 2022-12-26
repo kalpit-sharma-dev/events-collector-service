@@ -7,6 +7,6 @@ import (
 )
 
 type DatabaseRepository interface {
-	CreateEvents(ctx context.Context, req models.Request) (eventResp models.Response, err error)
-	GetAllEvents(ctx context.Context) (eventResp []models.Response, err error)
+	CreateEvents(ctx context.Context, req models.Event) (eventResp models.Event, err error)
+	GetAllEvents(ctx context.Context) (eventList models.EventList, err error)
 }

@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    {
+    "name": "Remote Debug in Docker",
+    "type": "go",
+    "request": "attach",
+    "mode": "remote",
+    "cwd": "${workspaceRoot}",
+    "remotePath": "/go/app",
+    "port": 40000,
+    "host": "localhost",
+    "showLog": true,
+    "trace": "verbose"
+    }
+    ]
+    }

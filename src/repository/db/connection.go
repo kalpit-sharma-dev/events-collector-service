@@ -4,10 +4,12 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+
+	_ "github.com/lib/pq"
 )
 
 const (
-	HOST = "database"
+	HOST = "postgres"
 	PORT = 5432
 )
 
@@ -18,19 +20,20 @@ type Database struct {
 	Conn *sql.DB
 }
 
-func GetDatabaseProvider(username, password, database string) *sql.DB {
+func GetDatabaseProvider(username, password, database string) (*sql.DB, error) {
 	//db := Database{}
 	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		HOST, PORT, username, password, database)
+	fmt.Println("###########################", dsn)
 	conn, err := sql.Open("postgres", dsn)
 	if err != nil {
-		return conn
+		return conn, err
 	}
 	//db.Conn = conn
 	err = conn.Ping()
 	if err != nil {
-		return conn
+		return conn, err
 	}
 	log.Println("Database connection established")
-	return conn
+	return conn, err
 }
