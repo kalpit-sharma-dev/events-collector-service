@@ -7,5 +7,5 @@ type Event struct {
 	CreatedAt   string `json:"created_at"`
 }
 type EventList struct {
-	Events []Event `json:"events"`
+	Events []Event `json:"events,omitempty"`
 }
